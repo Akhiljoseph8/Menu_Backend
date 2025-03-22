@@ -1,6 +1,7 @@
 
 const Menu = require('../Model/menuModel')
-// Controller function to add a new menu
+
+//Menu adding to database
 exports.addMenu = async (req, res) => {
     try {
       const { menuName, description, items } = req.body;
@@ -14,20 +15,20 @@ exports.addMenu = async (req, res) => {
     }
   };
 
+  //fetching all items from database
   exports.getMenu = async (req, res) => {
     try {
-      const menus = await Menu.find(); // Fetch all menu categories
-  
+      const menus = await Menu.find(); 
       const formattedMenus = menus.map((menu) => ({
         menuName: menu.menuName,
         description: menu.description,
         items: [
           {
-            category: menu.menuName, // Using menuName as category
+            category: menu.menuName, 
             items: menu.items.map((item) => ({
               name: item.itemName,
               description: item.description,
-              price: `$${item.price}`, // Convert price to string format with $
+              price: `$${item.price}`, 
             })),
           },
         ],
